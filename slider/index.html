@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Slider</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="slider">
+
+  <div class="slider-container">
+
+      <div class="slide"><img src="harging cable.png"></div>
+      <div class="slide"><img src="holder.png"></div>
+      <div class="slide"><img src="earphone.png"></div>
+      <div class="slide"><img src="adaptor.png"></div>
+
+  </div>
+
+  <!-- IMAGE NUMBER -->
+  <div class="counter">
+    <span id="current">1</span> / <span id="total">4</span>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="controls">
+    <button id="prev">⬅ Prev</button>
+    <button id="next">Next ➡</button>
+  </div>
+
+</div>
+
+<script>
+const slides = document.querySelectorAll(".slide");
+const current = document.getElementById("current");
+const total = document.getElementById("total");
+
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+
+let index = 0;
+
+total.textContent = slides.length;
+
+function updateSlider() {
+  slides.forEach((slide, i) => {
+    slide.classList.remove("active", "left", "right");
+
+    if (i === index) {
+      slide.classList.add("active");
+    } else if (i === index - 1) {
+      slide.classList.add("left");
+    } else if (i === index + 1) {
+      slide.classList.add("right");
+    }
+  });
+
+  current.textContent = index + 1;
+}
+
+next.onclick = () => {
+  index = (index + 1) % slides.length;
+  updateSlider();
+};
+
+prev.onclick = () => {
+  index = (index - 1 + slides.length) % slides.length;
+  updateSlider();
+};
+
+/* CLICK IMAGE → FULL SCREEN */
+slides.forEach(slide => {
+  slide.addEventListener("click", () => {
+    if (slide.classList.contains("active")) {
+      const img = slide.querySelector("img");
+      if (img.requestFullscreen) img.requestFullscreen();
+    }
+  });
+});
+
+updateSlider();
+</script>
+
+</body>
+</html>
