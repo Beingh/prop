@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  width: 100%;
+  background: lightgray;
+}
+
+.item {
+  height: 100px;
+  background: blue;
+  color: white;
+  margin: 5px;
+}
+
+/* different grow values */
+.item1 { flex-grow: 0; }
+.item2 { flex-grow: 1; }
+.item3 { flex-grow: 0; }
